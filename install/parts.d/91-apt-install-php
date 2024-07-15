@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+sudo add-apt-repository -y ppa:ondrej/php
+sudo apt-get update
+
+sudo DEBIAN_FRONTEND=noninteractive \
+  apt-get install -y php8.2 \
+  php8.2-cli \
+  php8.2-{bz2,curl,mbstring,intl,xml} \
+  php8.2-fpm
