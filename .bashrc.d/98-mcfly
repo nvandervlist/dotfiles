@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+if command -v mcfly &> /dev/null; then
+
+  export MCFLY_FUZZY=2
+  export MCFLY_RESULTS=$(($(tput lines) - 4))
+  export MCFLY_INTERFACE_VIEW=BOTTOM
+
+  eval "$(mcfly init bash)"
+
+  # Fix/workaround for <https://github.com/cantino/mcfly/issues/240>
+
+  if [[ $- =~ .*i.* &&
+    ${BASH_VERSINFO[0]} -eq 5 && ${BASH_VERSINFO[1]} -lt 2 ]]; then
+
+    mcfly_search() {
+      echo "#mcfly: ${READLINE_LINE[*]}" >> "$MCFLY_HISTORY"
+      READLINE_LINE=
+      mcfly search
+      stty sane
+    }
+
+    bind -x '"\C-r": mcfly_search'
+
+  fi
+
+fi
