@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+mkdir -p ~/.config
+
+if [ ! -e ~/.config/hadolint.yaml ]; then
+  ln -s -r "${base:?}/.config/hadolint.yaml" \
+    ~/.config/hadolint.yaml
+fi
+
+if [ ! -e ~/.config/gh/config.yml ]; then
+  mkdir -p ~/.config/gh
+  ln -s -r "${base:?}/.config/gh/config.yml" \
+    ~/.config/gh/config.yml
+fi
+
+if [ ! -e ~/.config/fastfetch/config.jsonc ]; then
+  mkdir -p ~/.config/fastfetch
+  ln -s -r "${base:?}/.config/fastfetch/config.jsonc" \
+    ~/.config/fastfetch/config.jsonc
+fi
+
+if [ ! -e ~/.config/powerline-go/config.json ]; then
+  mkdir -p ~/.config/powerline-go
+  ln -s -r "${base:?}/.config/powerline-go/config.json" \
+    ~/.config/powerline-go/config.json
+fi
